@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import Firebase from './firebase/config';
+import 'firebase/auth';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => {
+        Firebase.auth().createUserWithEmailAndPassword('devan@gmail.com', 'password')
+          .then((userCredential) => {
+
+            // Signed in 
+            var user = userCredential.user;
+            // ...
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+          });
+        }}></button>
     </div>
   );
 }
